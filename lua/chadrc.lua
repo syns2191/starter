@@ -6,12 +6,30 @@
 local M = {}
 
 M.base46 = {
-	theme = "onedark",
+	theme = "solarized_osaka",
+  transparency = false,
+  custom_highlights = {
+    Normal = {
+      bg = "#00000099"
+    }
+  }
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
 	-- 	["@comment"] = { italic = true },
 	-- },
+}
+
+M.plugins = {
+  user = {
+    ["nvim-base46"] = {
+      custom_highlights = {
+        Normal = {
+          bg = "#00000099"
+        }
+      }
+    }
+  }
 }
 
 return M
