@@ -16,6 +16,13 @@ vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
 
+-- neovim ufo
+vim.o.foldcolumn = "1"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+-- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+vim.g.codeium_enabled = false
 -- load plugins
 require("lazy").setup({
   {
@@ -34,6 +41,8 @@ dofile(vim.g.base46_cache .. "statusline")
 
 require "options"
 require "nvchad.autocmds"
+require("configs.cmp")
+require("configs.noice")
 
 vim.schedule(function()
   require "mappings"

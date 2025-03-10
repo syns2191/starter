@@ -22,8 +22,8 @@ local solarized_color = {
 }
 
 local o = vim.o
-o.cursorlineopt ='both' -- to enable cursorline!
-o.relativenumber = true
+o.cursorlineopt = 'both' -- to enable cursorline!
+o.relativenumber = false
 o.cursorline = true
 
 

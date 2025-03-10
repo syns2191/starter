@@ -6,15 +6,17 @@ local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+map("i", "jj", "<ESC>")
+map("i", "JJ", "<ESC>")
+map("i", "JK", "<ESC>")
 
 local term_clear = function()
-  vim.fn.feedkeys("^L", "n")
+  vim.fn.feedkeys("", "n")
   local sb = vim.bo.scrollback
   vim.bo.scrollback = 1
   vim.bo.scrollback = sb
 end
 -- kmap({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
-
 map({ "n", "t" }, "<A-i>", function()
   require("nvchad.term").toggle {
     pos = "float",
@@ -30,7 +32,7 @@ end, { desc = "terminal toggle floating term" })
 
 map("t", "<C-t>", "<C-\\><C-n>", { desc = "Switch to normal mode in terminal" })
 map("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", { desc = "Toggle Git blame" })
-map("t", "<C-l>", term_clear)
+map("t", "<C-[>", term_clear)
 
 -- move line down
 map("n", "<A-j>", ":m .+1<CR>==", { desc = "move line up normanl mode" })
@@ -93,10 +95,10 @@ map('n', '<leader>gr', ':Gvdiffsplit!<CR>', { noremap = true, silent = true })
 map('n', '<leader>gh', ':DiffviewFileHistory %<CR>', { noremap = true, silent = true })
 
 map('n', '<leader>gb', ':GitBlameToggle<CR>', { noremap = true, silent = true })
-map('n', '<leader>gnc', ']c', { noremap = true, silent = true })
+map('n', 'gnc', ']c', { noremap = true, silent = true })
 
 -- Jump to the previous change in Neogit
-map('n', '<leader>gnp', '[c', { noremap = true, silent = true })
+map('n', 'gnp', '[c', { noremap = true, silent = true })
 -- end of git
 map('n', '<leader>j', '5j', { noremap = true, silent = true })
 
@@ -108,3 +110,20 @@ map("n", "<leader>w[", "ysiw[", { noremap = true, silent = true })
 map("v", "<leader>w[", "S[", { noremap = true, silent = true })
 map("v", "<Tab>", ">gv", { noremap = true, silent = true })
 map("v", "<S-Tab>", "<gv", { noremap = true, silent = true })
+
+
+-- key remapping folding ufo
+map("n", "zR", require('ufo').openAllFolds)
+map("n", "zM", require('ufo').closeAllFolds)
+map("n", "zr", require('ufo').openFoldsExceptKinds)
+map("n", "zm", require('ufo').closeFoldsWith)
+map("n", "zo", ':foldopen<CR>')
+map("n", "zc", ':foldclose<CR>')
+
+map("n", "K", function ()
+  local winid = require('ufo').peekFoldedLinesUnderCursor()
+  if not winid then
+    vim.lsp.buf.hover()
+  end
+end)
+
